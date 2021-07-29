@@ -1,42 +1,42 @@
-// NOTE: install dependencies using `npm install` or view readme.md before beginning
-// (`nodemon` refreshes your express server every time you make changes)
-
-// express is a server-side web framework that runs on a server (essentially another computer)
-// to give you (your computer) a website or data through the internet (HTTP)
-// *** you can use express to make your own API ***
-
-// import express using `require`
-// (you import files/libraries using `require` on Node.js)
 const express = require("express");
-// make an instance of the library
 const app = express();
+const { products, people } = require("./data");
 
-// we tell the app to listen to port 6060 on our computer (locally) => http://localhost:6060
 const port = 6060;
 app.listen(port, () => {
-    console.log(`Example app listening @ http://localhost:${port}`);
+    console.log(`Example app running @ http://localhost:${port}`);
 });
 
-// when a browser accesses the root (/) of the server, it issues a GET request.
-// `app.get('/')` listens when this happens, and runs a callback function
 app.get("/", (req, res) => {
-    // when the homepage is requested, the server sends "Hello World" w/ `res.send()`
-    return res.send("Hello World!");
+    // you can use `res.json` to specifically send json data
+    // here, we send an array of objects from data.js
+    return res.json(products);
 });
 
-// The callback can utilize information from the browser's request `req` and
-// interact with the object of the server's oncoming response `res`
-app.get("/client", (req, res) => {
-    // the request object provides a lot of information
-    // we can get the url entry that the browser accessed
-    const { url } = req;
-    // and even the browser type itself if we dig into the request headers
-    const browserInfo = req.headers["user-agent"];
-    // return info on page
-    return res.send(`
-    Client entry url: ${url}
-    <br>
-    Client browser: ${browserInfo}
-    `);
+// === Parameters ===
+
+// the specified route "/product/:productId" indicates that `:productId` is
+// a parameter ("placeholder") for anything that the user puts. This parameter is accessible
+// in `req.params`, and is very useful for accessing specific entries/points of data
+app.get("/product/:productId", (req, res) => {
+    const id = req.params.productId;
+    // find product with appropriate id in `products` array
+    const product = products.find((product) => product.id === parseInt(id));
+    // if product is undefined, return 404 error
+    if (!product) return res.status(404).send("Product Not Found");
+    return res.json(product);
 });
-// try going onto http://localhost:6060/client
+
+// you are able to use multiple parameters in your route like this:
+app.get("/product/:productId/:prop", (req, res) => {
+    const { productId, prop } = req.params;
+    // find product with appropriate id in `products` array, and get requested prop
+    const product = products.find(
+        (product) => product.id === parseInt(productId)
+    );
+    const productProp = product[prop]
+    if (!productProp) return res.status(404).send("Product property not found");
+    return res.json(productProp);
+});
+
+// === Queries ===
