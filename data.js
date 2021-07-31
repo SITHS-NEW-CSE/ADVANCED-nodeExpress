@@ -35,6 +35,7 @@ const people = [
     { id: 3, name: "susan" },
     { id: 4, name: "anna" },
     { id: 5, name: "emma" },
+    { id: 6, name: "jill" },
 ];
 // in Node.js, you export variables by setting the `module.exports` property
 module.exports = { products, people };

@@ -1,0 +1,14 @@
+<!-- Notice how we are not referencing the image in the "public" folder 
+    but at the root of the server since it's exposed via `express.static()`! -->
+<img src="/cs50-cat.jpeg" alt="" />
+<p>
+    This cat ^^^ is being served statically from express using
+    `express.static()` middleware!
+</p>
+
+<!-- on HTML you can define a form to issue a POST request to the server when submitted -->
+<form method="POST">
+    <label for="name-field">Add New Name:</label>
+    <input id="name-field" type="text" required name="name" />
+    <button type="submit">Add</button>
+</form>
