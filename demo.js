@@ -6,3 +6,10 @@
 const x = 10;
 const y = 20;
 console.log(x + y);
+
+
+// NOTE: the window and document objects are nonexistent on Node.js 
+// because you won't be running this code on the browser
+
+// console.log(window); // will result in an error
+// console.log(document);
