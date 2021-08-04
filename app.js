@@ -1,13 +1,14 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var productRouter = require('./routes/product');
+// import routers
+const indexRouter = require('./routes/index');
+const productRouter = require('./routes/product');
 
-var app = express();
+const app = express();
 
 // view engine setup (defining handlebars.js as our templating engine)
 app.set('views', path.join(__dirname, 'views'));
@@ -26,7 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // (routes in productRouter will require `/product` prepended)
 app.use('/', indexRouter);
 app.use('/product', productRouter)
-// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
