@@ -1,0 +1,19 @@
+{{!-- we import the statically-served css file for this template --}}
+<link rel="stylesheet" href="/stylesheets/product.css">
+<h1>
+    Product Inventory
+    {{!-- example of using if statements in handlebars --}}
+    {{#if limit}}
+    <i>(Over ${{limit}})</i>
+    {{/if}}
+</h1>
+<ol>
+    {{!-- iterating through an array of objects with handlebars --}}
+    {{#each products}}
+        <li>
+            {{!-- automatically parses products.name and products.price --}}
+            <h2>{{name}}</h2>
+            <p>Cost: ${{price}}</p>
+        </li>
+    {{/each}}
+</ol>
