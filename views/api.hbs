@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="/stylesheets/api.css" />
+<div class="container">
+
+    <h1>Search New York Times Articles</h1>
+
+    {{!-- html form that will issue a get request to /api/answer in our server --}}
+    <form class="searches" action="/api/answer" method="get">
+        <label for="search-box">Query:</label>
+        {{!-- the value of this input will be put as a query entry in the get request --}}
+        <input
+            type="text"
+            name="search-box"
+            id="search-box"
+            placeholder="Begin Searching Here"
+        />
+        <button type="submit">Search in Form</button>
+    </form>
+</div>

@@ -1,4 +1,20 @@
-> NOTE: This demo express app will run on http://localhost:3000.
+## Environment Variables
+Being able to set variables in your local machine or server instead of putting it in your code is much safer when security is of concern, especially if you are using api keys (others can steal your key--which is supposed to be kept confidential--if it's exposed on github). You can temporarily set variables by doing the following:
+```
+// Linux and MacOS
+export API_KEY=...
+
+// Windows CMD
+set API_KEY="..."
+
+// Windows PowerShell
+$env:API_KEY="..."
+```
+These variables will exist until you close/restart your terminal.
+
+---
+
+> NOTE: This demo express app will run on http://localhost:3000 by default.
 
 # Express using express-generator
 This project structure was generated using the `express` npm package. You are able to install it using `npm i -g express` and make an express app using `express --view=hbs <app_name>`. 
