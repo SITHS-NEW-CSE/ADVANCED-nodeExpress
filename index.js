@@ -6,8 +6,8 @@ const express = require("express");
 // make an instance of express
 const app = express();
 
-// we tell the app to listen to port 6060 on our computer (locally) => http://localhost:6060
-const port = 6060;
+// we tell the app to listen to port 3000 on our computer (locally) => http://localhost:3000
+const port = 3000;
 app.listen(port, () => {
     console.log(`Example app listening @ http://localhost:${port}`);
 });
@@ -15,7 +15,7 @@ app.listen(port, () => {
 // === INTRO ===
 
 // when you access the root (/) of the server, you issue a GET request.
-// Below is a "handler" of GET requests from `http://localhost:6060`
+// Below is a "handler" of GET requests from `http://localhost:3000`
 app.get("/", (req, res) => {
     // use `res.send()` to send typical sorts of data, such as strings
     return res.send("Hello World!");
@@ -39,7 +39,7 @@ app.get("/client", (req, res) => {
     Client browser: ${browserInfo}
     `);
 });
-// try going onto http://localhost:6060/client
+// try going onto http://localhost:3000/client
 
 // === PARAMETERS & QUERIES ===
 
@@ -50,6 +50,10 @@ const people = [
     { name: "Donald", data: -10 },
     { name: "Trump", data: 1000001010 },
 ];
+
+app.get('/people', (req, res) => {
+    return res.json(people)
+})
 
 // The client can provide data on the route via parameters (`:id`)
 app.get("/parameter/:id", (req, res) => {
@@ -90,7 +94,17 @@ app.get("/query", (req, res) => {
     return res.json(filteredPeople);
     // NOTE: it will return all people if no queries are passed
 });
-// Try accessing http://localhost:6060/query?limit=40 (it'll return people with `data` > 40)
+// Try accessing http://localhost:3000/query?limit=40 (it'll return people with `data` > 40)
+
+// === POST ===
+// when the client issues a post request, it basically means that the client wants to
+// add new data to the server.
+app.post("/addPerson/:name/:data", (req, res) => {
+    const newPerson = req.params;
+    people.push(newPerson);
+    return res.redirect('/people')
+})
+// you can issue a post request with a html form (covered later) or by using postman.
 
 
 // P.S. when making new express projects, use the `nodemon` package which will 
