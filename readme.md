@@ -1,3 +1,30 @@
+# Deploying to Heroku
+1. Make a Heroku account and install the Heroku CLI (https://devcenter.heroku.com/articles/heroku-cli)
+2. Set node version on package.json:
+```
+<package.json>
+...
+"engines": {
+    "node": "14.x"
+}
+...
+```
+3. Make a Procfile in the root of your project with the following: `web: npm run start`.
+4. Login into your heroku account in the command line, and deploy to heroku
+```
+$ git add .
+
+$ git commit -m "Added a Procfile."
+
+$ heroku login
+
+$ heroku create
+
+$ git push heroku main
+```
+5. Your heroku link to your deployed project will be displayed in the terminal. Enjoy!
+---
+
 ## Environment Variables
 Being able to set variables in your local machine or server instead of putting it in your code is much safer when security is of concern, especially if you are using api keys (others can steal your key--which is supposed to be kept confidential--if it's exposed on github). You can temporarily set variables by doing the following:
 ```
